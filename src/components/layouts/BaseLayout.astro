@@ -1,0 +1,119 @@
+---
+import { SITE, BRAND } from '$/config.js';
+import PrimaryNavigation from '$components/PrimaryNavigation.astro';
+import MobileNavigation from '$components/MobileNavigation.astro';
+import SocialLinks from '$components/SocialLinks.astro';
+import ContentSection from '$components/ContentSection.astro';
+import Logo from '$components/Logo.astro';
+import { SEO } from 'astro-seo';
+
+const {
+    title = null,
+    description = SITE.description,
+    heroImage = null,
+    heroAlt = null,
+} = Astro.props;
+
+const computedTitle = (title ? `${title} | ` : '') + SITE.title;
+
+const date = new Date();
+---
+
+<html lang="en" class="h-full">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <SEO
+        title={computedTitle}
+        description={description}
+        canonical={Astro.request.canonicalURL}
+    />
+
+    <link rel="icon" type="image/png" href="/favicon.png?v=2" />
+    <link rel="sitemap" href="/sitemap.xml"/>
+    <link rel="stylesheet" href={Astro.resolve('../../css/app.css')} />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bitter:wght@600&family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+</head>
+
+<body class="h-full text-gray-800">
+    <a href="#site-main" class="sr-only focus:not-sr-only">Skip to main content</a>
+
+    <div id="site-wrapper" class="flex flex-col h-full">
+        <header class="py-4 text-white bg-gray-900 border-b-4 border-primary-500" x-data={`{open: false}`}>
+            <div class="container">
+                <div class="flex items-center justify-between">
+                    <a href="/" class="block w-auto h-12">
+                        <Logo version="logoReversed" />
+                    </a>
+                    <div class="hidden lg:block">
+                        <PrimaryNavigation />
+                    </div>
+                    <div class="block lg:hidden">
+                        <button type="button" class="flex" x-on:click="open = !open">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="absolute w-full py-4 bg-gray-900 border-b-4 shadow-md lg:hidden border-primary-500" x-show="open" x-trap="open" x-bind:class={'{\'block\': open, \'hidden\': !open}'} style="display: none;">
+                <MobileNavigation />
+            </div>
+        </header>
+
+        <main id="site-main" class="flex-1">
+            <slot />
+        </main>
+
+        <footer class="text-sm text-white bg-gray-900">
+            <ContentSection>
+                <div class="flex flex-col items-center">
+                    <div class="w-full">
+                        <SocialLinks />
+                    </div>
+
+                    <nav id="footer-menu" class="mt-6">
+                        <ul class="my-2 space-y-2 text-center list-reset lg:text-left lg:space-y-0 lg:flex lg:items-center lg:space-x-3">
+                            <li><a class="text-white hover:text-accent-500 focus:text-accent-500" href="/privacy-policy">Privacy Policy</a></li>
+                            <li><a class="text-white hover:text-accent-500 focus:text-accent-500" href="/terms-of-use">Terms of Use</a></li>
+                            <li><a class="text-white hover:text-accent-500 focus:text-accent-500" href="/accessibility-statement">Accessibility Statement</a></li>
+                        </ul>
+                    </nav>
+
+                    <p class="text-xs">
+                        ©Copyright {SITE.startDate}{ date.getFullYear() != SITE.startDate ? ` - ${date.getFullYear()}` : '' }{' '}{ BRAND.name }. All Rights Reserved
+                    </p>
+                </div>
+            </ContentSection>
+        </footer>
+    </div>
+
+    <script defer src="https://unpkg.com/@alpinejs/trap@3.x.x/dist/cdn.min.js"></script>
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script>
+        (function () {
+            /** External Links */
+            const links = document.querySelectorAll("a[href^='https://'], a[href^='http://']")
+            const host = window.location.hostname
+
+            const isInternalLink = link => new URL(link).hostname === host
+
+            links.forEach(link => {
+                if (isInternalLink(link)) return
+
+                link.setAttribute("target", "_blank")
+                link.setAttribute("rel", "noopener")
+            })
+        })()
+    </script>
+</body>
+
+</html>
+

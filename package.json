@@ -1,0 +1,27 @@
+{
+  "name": "@example/starter",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview"
+  },
+  "devDependencies": {
+    "@alpinejs/trap": "^3.4.2",
+    "alpinejs": "^3.4.2",
+    "astro": "^0.20.12",
+    "astro-seo": "^0.3.13",
+    "image-size": "^1.0.0"
+  },
+  "dependencies": {
+    "@snowpack/plugin-postcss": "^1.4.3",
+    "@tailwindcss/forms": "^0.3.4",
+    "dotenv": "^10.0.0",
+    "postcss": "^8.3.11",
+    "postcss-cli": "^9.0.1",
+    "postcss-import": "^14.0.2",
+    "tailwindcss": "^2.2.17"
+  }
+}

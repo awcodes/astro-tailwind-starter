@@ -1,0 +1,9 @@
+---
+const { classes = "" } = Astro.props;
+---
+
+<div class={`relative py-8 lg:py-12 ${classes}`}>
+    <div class="container">
+        <slot />
+    </div>
+</div>

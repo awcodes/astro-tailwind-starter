@@ -1,0 +1,112 @@
+a {
+  color: var(--link-color);
+  text-decoration: underline;
+}
+
+a:hover,
+a:focus {
+  color: var(--link-color-hover);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  @apply text-gray-900 font-display font-semibold;
+
+  + hr {
+    @apply mt-2;
+  }
+
+  + p,
+  + ul,
+  + ol,
+  + img,
+  + figure,
+  + dd,
+  + div {
+    @apply mt-2;
+  }
+}
+
+h2,
+h3,
+h4,
+h5,
+h6 {
+  &:not(:first-child) {
+    @apply mt-6;
+  }
+}
+
+h1 {
+  @apply text-3xl leading-tight lg:text-4xl;
+}
+
+h2 {
+  @apply text-2xl leading-tight lg:text-3xl;
+}
+
+h3 {
+  @apply text-xl leading-snug lg:text-2xl;
+}
+
+h4,
+h5,
+h6 {
+  @apply text-lg lg:text-xl;
+}
+
+hr {
+  @apply border-gray-300 mt-6 mb-6;
+}
+
+p,
+ul,
+ol {
+  @apply mt-3 mb-3;
+
+  &:first-child {
+    margin-top: 0;
+  }
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+ul,
+ol {
+  @apply ml-4 pl-4;
+}
+
+ul {
+  list-style: disc;
+}
+
+ol {
+  list-style: list-decimal;
+}
+
+ul,
+ol {
+  ul {
+    list-style-type: circle;
+  }
+
+  ul,
+  ol {
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem !important;
+
+    ul {
+      list-style-type: square;
+    }
+  }
+}
+
+img {
+  image-rendering: -webkit-optimize-contrast;
+}

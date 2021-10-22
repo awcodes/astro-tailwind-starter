@@ -1,0 +1,19 @@
+---
+import BaseLayout from '$/components/layouts/BaseLayout.astro';
+import Hero from '$/components/Hero.astro';
+import ContentSection from '$/components/ContentSection.astro';
+
+const { content } = Astro.props;
+---
+
+<BaseLayout title={content.title} description={content.description}>
+
+    {content.heroImage &&
+        <Hero image={content.heroImage} alt={content.heroAlt} />
+    }
+
+    <ContentSection>
+        <slot />
+    </ContentSection>
+
+</BaseLayout>

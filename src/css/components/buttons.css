@@ -1,0 +1,60 @@
+.btn {
+  @apply leading-none py-2 px-4 rounded border border-gray-400 text-primary-500 bg-white no-underline inline-flex items-center justify-center text-center text-base;
+}
+
+.btn:hover,
+.btn:focus {
+  @apply bg-gray-100 no-underline;
+}
+
+.btn-primary {
+  @apply border-transparent text-gray-900 bg-primary-500;
+}
+
+.btn-primary:hover,
+.btn-primary:focus {
+  @apply text-gray-900 bg-primary-600;
+}
+
+.btn-secondary {
+  @apply border-transparent text-gray-900 bg-secondary-500;
+}
+
+.btn-secondary:hover,
+.btn-secondary:focus {
+  @apply text-gray-900 bg-secondary-600;
+}
+
+.btn-tertiary {
+  @apply border-transparent text-gray-900 bg-tertiary-500;
+}
+
+.btn-tertiary:hover,
+.btn-tertiary:focus {
+  @apply text-gray-900 bg-tertiary-600;
+}
+
+.btn-accent {
+  @apply border-transparent text-white bg-accent-500;
+}
+
+.btn-accent:hover,
+.btn-accent:focus {
+  @apply text-white bg-accent-600;
+}
+
+.btn-link {
+  color: var(--link-color);
+  text-decoration: underline;
+}
+
+.btn-link:hover,
+.btn-link:focus {
+  color: var(--link-color-hover);
+}
+
+@screen md {
+  .btn {
+    @apply text-xl;
+  }
+}

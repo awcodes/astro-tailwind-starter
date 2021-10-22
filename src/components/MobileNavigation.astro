@@ -1,0 +1,16 @@
+---
+import { PRIMARY_NAVIGATION } from '$/config.js'
+const pathName = Astro.request.url.pathname;
+---
+
+<nav aria-label="primary">
+    <div class="container">
+        <ul class="text-lg list-reset">
+            {PRIMARY_NAVIGATION.map((item) => (
+                <li>
+                    <a href={item.link} aria-current={`${pathName == item.link ? 'page' : 'false'}`} class={`block py-2 no-underline focus:text-primary-500 ${pathName == item.link ? 'text-accent-500' : 'text-white'}`}>{item.label}</a>
+                </li>
+            ))}
+        </ul>
+    </div>
+</nav>

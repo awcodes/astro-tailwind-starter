@@ -1,0 +1,14 @@
+---
+import { PRIMARY_NAVIGATION } from '$/config.js'
+const pathName = Astro.request.url.pathname;
+---
+
+<nav aria-label="primary">
+    <ul class="flex items-center my-0 space-x-6 text-lg list-reset">
+        {PRIMARY_NAVIGATION.map((item) => (
+            <li>
+                <a href={item.link} aria-current={`${pathName == item.link ? 'page' : 'false'}`} class={`border-b-2 block no-underline hover:text-primary-500 focus:text-primary-500 hover:border-primary-500 ${pathName == item.link ? 'border-accent-500 text-accent-500' : 'border-transparent text-white'}`}>{item.label}</a>
+            </li>
+        ))}
+    </ul>
+</nav>

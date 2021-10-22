@@ -1,0 +1,7 @@
+---
+import { BRAND } from '$/config.js';
+
+const { version = 'logo' } = Astro.props;
+---
+
+<img src={BRAND.images[version].url} alt={BRAND.images[version].alt} width={BRAND.images[version].width} height={BRAND.images[version].height} class="w-full h-full" />

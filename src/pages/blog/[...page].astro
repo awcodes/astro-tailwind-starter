@@ -1,0 +1,42 @@
+---
+import { AUTHORS } from '$/config.js';
+import BaseLayout from '$components/layouts/BaseLayout.astro';
+import ContentSection from '$components/ContentSection.astro';
+import Hero from '$components/Hero.astro';
+import PostPreview from '$components/PostPreview.astro';
+import Pagination from '$components/Pagination.astro';
+
+const title = 'ATS Blog';
+
+export async function getStaticPaths({paginate}) {
+  const allPosts = Astro.fetchContent('../post/*.md');
+  const sortedPosts = allPosts.sort((a, b) => new Date(b.date).valueOf() - new Date(a.date).valueOf());
+  return paginate(sortedPosts, {pageSize: 25});
+}
+
+const { page } = Astro.props;
+---
+
+<BaseLayout title={title}>
+
+    <Hero image="/assets/manuel-meurisse-EuCll-F5atI-unsplash.jpg" alt="couple sitting on beach next to fire" />
+
+    <ContentSection>
+        <h1>ATS Blog</h1>
+        {(page.url.prev || page.url.next) &&
+            <small class="count">Page {page.currentPage} of {page.lastPage}</small>
+        }
+
+        <div class="mt-12 space-y-8">
+            {page.data.map((post) => <PostPreview post={post} author={AUTHORS[post.author]} />)}
+        </div>
+
+        {(page.url.prev || page.url.next) &&
+            <div class="pt-6 mt-6 border-t">
+                <Pagination prevUrl={page.url.prev} nextUrl={page.url.next} />
+            </div>
+        }
+
+    </ContentSection>
+
+</BaseLayout>

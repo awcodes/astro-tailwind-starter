@@ -1,0 +1,23 @@
+---
+import sizeOf from 'image-size';
+
+export interface Props {
+    image: string,
+    alt?: string,
+    classes?: string,
+}
+
+const {
+    image = null,
+    alt = "",
+    classes = ""
+} = Astro.props;
+
+const dimensions = image ? sizeOf('./public/' + image) : {width: 0, height: 0};
+---
+
+{image &&
+    <aside id="site-hero" class="h-[33vh]">
+        <img src={image} alt={alt} width={dimensions.width} height={dimensions.height} class={`object-cover w-full h-full ${classes}`} />
+    </aside>
+}
